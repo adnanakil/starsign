@@ -13,7 +13,7 @@ export default function MoonPhaseLoader() {
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
-        animation: 'fadeIn 0.5s ease-out',
+        animation: 'fadeIn 1.5s ease-in-out',
         overflow: 'hidden'
       }}
     >
