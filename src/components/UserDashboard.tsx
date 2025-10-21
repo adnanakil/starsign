@@ -85,7 +85,7 @@ export default function UserDashboard({ userId, userName }: UserDashboardProps) 
   }
 
   return (
-    <div className="max-w-4xl mx-auto" style={{ width: '100%' }}>
+    <div className="max-w-4xl mx-auto" style={{ width: '100%', paddingBottom: 'max(env(safe-area-inset-bottom), 1rem)' }}>
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
