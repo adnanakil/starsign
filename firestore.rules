@@ -1,0 +1,18 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Birth charts collection
+    match /birthCharts/{chartId} {
+      // Allow anyone to read charts
+      allow read: if true;
+
+      // Allow anyone to create new charts
+      allow create: if true;
+
+      // Prevent updates and deletes for now
+      // In production, you'd want to add authentication
+      allow update, delete: if false;
+    }
+  }
+}
