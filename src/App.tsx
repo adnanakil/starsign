@@ -89,11 +89,11 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen py-8 px-3 sm:py-12 sm:px-4" style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', overflowX: 'hidden', boxSizing: 'border-box' }}>
+    <div className="min-h-screen py-4 px-3 sm:py-12 sm:px-4" style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', overflowX: 'hidden', boxSizing: 'border-box' }}>
       <div className="max-w-3xl mx-auto" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-light mb-3 tracking-wide" style={{ color: 'var(--color-text-primary)', letterSpacing: '0.1em' }}>
+        <div className="text-center mb-4 sm:mb-12">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-light mb-2 tracking-wide" style={{ color: 'var(--color-text-primary)', letterSpacing: '0.1em' }}>
             STARSIGN
           </h1>
           <p className="text-sm tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em' }}>
@@ -103,7 +103,7 @@ function App() {
 
         {/* Sign in button for logged out users */}
         {!user && !chart && (
-          <div className="text-center mb-6">
+          <div className="text-center mb-4">
             <button
               onClick={() => setShowAuthModal(true)}
               className="text-sm"
