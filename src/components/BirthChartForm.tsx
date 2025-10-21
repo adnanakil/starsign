@@ -17,19 +17,10 @@ export default function BirthChartForm({ onSubmit, isLoading }: BirthChartFormPr
     formState: { errors },
   } = useForm<BirthChartData>();
 
-  // Show moon phase loader when generating chart
-  if (isLoading) {
-    return (
-      <div className="w-full max-w-md mx-auto">
-        <div className="card" style={{ padding: '3rem 1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '300px' }}>
-          <MoonPhaseLoader />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="w-full max-w-md mx-auto">
+      {/* Moon phase loader overlay */}
+      {isLoading && <MoonPhaseLoader />}
       <div className="card" style={{ padding: '1rem' }}>
         <div className="text-center mb-3 sm:mb-8">
           <h2 className="text-lg sm:text-xl font-light mb-1 tracking-wide" style={{ color: 'var(--color-text-primary)', letterSpacing: '0.08em' }}>
