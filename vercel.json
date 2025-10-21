@@ -1,3 +1,4 @@
 {
+  "name": "starsign",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
