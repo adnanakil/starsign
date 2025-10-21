@@ -11,8 +11,8 @@ export async function generateAIInterpretation(
   chartData: Partial<ChartInterpretation>
 ): Promise<string> {
   try {
-    // Use Gemini Pro model
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    // Use Gemini Flash (latest) - optimized for speed
+    const model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
 
     // Create a detailed prompt with all chart information
     const prompt = `You are an expert astrologer providing a personalized birth chart interpretation. Write a detailed, insightful, and empowering interpretation for someone with the following astrological placements:
