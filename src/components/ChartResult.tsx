@@ -3,9 +3,10 @@ import type { ChartInterpretation } from '../types';
 interface ChartResultProps {
   chart: ChartInterpretation;
   onReset: () => void;
+  onShare?: () => void;
 }
 
-export default function ChartResult({ chart, onReset }: ChartResultProps) {
+export default function ChartResult({ chart, onReset, onShare }: ChartResultProps) {
   return (
     <div className="w-full max-w-2xl mx-auto space-y-4 sm:space-y-6">
       {/* Header Card */}
@@ -94,7 +95,7 @@ export default function ChartResult({ chart, onReset }: ChartResultProps) {
           New Chart
         </button>
         <button
-          onClick={() => window.print()}
+          onClick={onShare}
           className="font-medium py-3 px-4 sm:px-6 transition-colors duration-200 border"
           style={{
             backgroundColor: 'var(--color-surface)',
@@ -115,7 +116,7 @@ export default function ChartResult({ chart, onReset }: ChartResultProps) {
             e.currentTarget.style.color = 'var(--color-text-primary)';
           }}
         >
-          Print
+          Share
         </button>
       </div>
     </div>

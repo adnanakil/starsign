@@ -67,6 +67,13 @@ function App() {
     setError(null);
   };
 
+  const handleShare = () => {
+    if (!user) {
+      // Show auth modal if user is not logged in
+      setShowAuthModal(true);
+    }
+  };
+
   // Show loading while checking auth state
   if (isAuthLoading) {
     return (
@@ -124,7 +131,7 @@ function App() {
         {!chart ? (
           <BirthChartForm onSubmit={handleSubmit} isLoading={isLoading} />
         ) : (
-          <ChartResult chart={chart} onReset={handleReset} />
+          <ChartResult chart={chart} onReset={handleReset} onShare={handleShare} />
         )}
       </div>
 

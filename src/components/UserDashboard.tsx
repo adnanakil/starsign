@@ -81,7 +81,7 @@ export default function UserDashboard({ userId, userName }: UserDashboardProps) 
   };
 
   if (selectedChart) {
-    return <ChartResult chart={selectedChart} onReset={handleCloseChart} />;
+    return <ChartResult chart={selectedChart} onReset={handleCloseChart} onShare={() => {}} />;
   }
 
   return (
