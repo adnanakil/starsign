@@ -1,5 +1,6 @@
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import type { BirthChartData } from '../types';
+import LocationAutocomplete from './LocationAutocomplete';
 
 interface BirthChartFormProps {
   onSubmit: (data: BirthChartData) => void;
@@ -10,6 +11,8 @@ export default function BirthChartForm({ onSubmit, isLoading }: BirthChartFormPr
   const {
     register,
     handleSubmit,
+    control,
+    setValue,
     formState: { errors },
   } = useForm<BirthChartData>();
 
@@ -80,16 +83,24 @@ export default function BirthChartForm({ onSubmit, isLoading }: BirthChartFormPr
             <label htmlFor="placeOfBirth" className="block text-xs font-medium mb-2 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
               Place of Birth
             </label>
-            <input
-              id="placeOfBirth"
-              type="text"
-              className="input-field"
-              placeholder="City, Country"
-              {...register('placeOfBirth', { required: 'Place of birth is required' })}
+            <Controller
+              name="placeOfBirth"
+              control={control}
+              rules={{ required: 'Place of birth is required' }}
+              render={({ field }) => (
+                <LocationAutocomplete
+                  value={field.value || ''}
+                  onChange={(location, latitude, longitude) => {
+                    field.onChange(location);
+                    if (latitude !== undefined && longitude !== undefined) {
+                      setValue('latitude', latitude);
+                      setValue('longitude', longitude);
+                    }
+                  }}
+                  error={errors.placeOfBirth?.message}
+                />
+              )}
             />
-            {errors.placeOfBirth && (
-              <p className="text-xs mt-1" style={{ color: '#8B3A3A' }}>{errors.placeOfBirth.message}</p>
-            )}
           </div>
 
           {/* Submit Button */}

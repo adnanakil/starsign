@@ -30,12 +30,32 @@ function calculateMoonSign(date: string): ZodiacSign {
   return signs[signIndex];
 }
 
-// Calculate rising sign (simplified - in production, requires exact birth time and location)
-function calculateRisingSign(time: string, _date: string): ZodiacSign {
+// Calculate rising sign using time, date, and location
+function calculateRisingSign(time: string, date: string, latitude?: number, longitude?: number): ZodiacSign {
   const signs: ZodiacSign[] = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
+
+  // Parse date and time
+  const birthDate = new Date(date + 'T' + time);
   const [hours, minutes] = time.split(':').map(Number);
-  const totalMinutes = hours * 60 + minutes;
-  const signIndex = Math.floor((totalMinutes / (24 * 60)) * 12) % 12;
+
+  // Calculate Local Sidereal Time (LST) - simplified formula
+  // This is a basic approximation that factors in longitude
+  const dayOfYear = Math.floor((birthDate.getTime() - new Date(birthDate.getFullYear(), 0, 0).getTime()) / 86400000);
+  const ut = hours + (minutes / 60);
+  const gst = (6.697374558 + 0.06570982441908 * dayOfYear + 1.00273790935 * ut) % 24;
+
+  // Convert to Local Sidereal Time using longitude
+  const lng = longitude || 0;
+  const lst = (gst + (lng / 15)) % 24;
+
+  // Calculate ascendant index based on LST and latitude
+  // This is still simplified but now uses actual location data
+  const lat = latitude || 0;
+  const latFactor = Math.abs(lat) / 90; // 0 to 1
+  const baseIndex = Math.floor((lst / 24) * 12);
+  const latOffset = Math.floor(latFactor * 2); // Latitude affects which sign rises
+
+  const signIndex = (baseIndex + latOffset) % 12;
   return signs[signIndex];
 }
 
@@ -130,7 +150,7 @@ export async function generateBirthChart(data: BirthChartData): Promise<ChartInt
 
   const sunSign = calculateSunSign(data.dateOfBirth);
   const moonSign = calculateMoonSign(data.dateOfBirth);
-  const risingSign = calculateRisingSign(data.timeOfBirth, data.dateOfBirth);
+  const risingSign = calculateRisingSign(data.timeOfBirth, data.dateOfBirth, data.latitude, data.longitude);
   const planetaryPositions = generatePlanetaryPositions(data.dateOfBirth, sunSign);
   const houses = generateHouses(risingSign);
   const interpretation = generateInterpretation(sunSign, moonSign, risingSign);
