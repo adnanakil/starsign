@@ -94,7 +94,7 @@ function App() {
         {/* Header */}
         <div className="text-center mb-3 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-light mb-1 tracking-wide" style={{ color: 'var(--color-text-primary)', letterSpacing: '0.1em' }}>
-            STARSIGN
+            NEPTUNE
           </h1>
           <p className="text-sm tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em' }}>
             Astrology Birth Chart Interpretation
