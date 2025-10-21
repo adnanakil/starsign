@@ -41,9 +41,8 @@ function App() {
         await saveBirthChart(chartWithUser);
         setChart(chartWithUser);
       } else {
-        // Show auth modal for guests
+        // Just show the chart for guests (no auth modal)
         setChart(generatedChart);
-        setShowAuthModal(true);
       }
     } catch (err) {
       setError('Failed to generate birth chart. Please try again.');
