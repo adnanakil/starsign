@@ -83,11 +83,6 @@ function App() {
       <div className="min-h-screen py-8 px-3 sm:py-12 sm:px-4" style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', overflowX: 'hidden', boxSizing: 'border-box' }}>
         <div className="max-w-3xl mx-auto" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
           <UserDashboard userId={user.uid} userName={user.email?.split('@')[0]} />
-
-          {/* Footer */}
-          <div className="text-center mt-16 text-xs" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em' }}>
-            <p>Birth chart interpretations are for entertainment purposes</p>
-          </div>
         </div>
       </div>
     );
@@ -132,11 +127,6 @@ function App() {
         ) : (
           <ChartResult chart={chart} onReset={handleReset} />
         )}
-
-        {/* Footer */}
-        <div className="text-center mt-16 text-xs" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em' }}>
-          <p>Birth chart interpretations are for entertainment purposes</p>
-        </div>
       </div>
 
       {/* Auth Modal */}
