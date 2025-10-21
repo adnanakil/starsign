@@ -80,7 +80,7 @@ function App() {
   // Show dashboard for logged in users (unless viewing a specific chart)
   if (user && !chart) {
     return (
-      <div className="py-3 px-3 sm:py-12 sm:px-4" style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', height: '100dvh', overflow: 'hidden', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
+      <div className="px-3 sm:py-12 sm:px-4" style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', height: '100dvh', overflow: 'hidden', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', paddingTop: 'max(env(safe-area-inset-top), 1rem)', paddingBottom: '1rem' }}>
         <div className="max-w-3xl mx-auto" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', flex: '1', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
           <UserDashboard userId={user.uid} userName={user.email?.split('@')[0]} />
         </div>
@@ -89,7 +89,7 @@ function App() {
   }
 
   return (
-    <div className="py-3 px-3 sm:py-12 sm:px-4" style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', height: '100dvh', overflow: 'hidden', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
+    <div className="px-3 sm:py-12 sm:px-4" style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', height: '100dvh', overflow: 'hidden', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', paddingTop: 'max(env(safe-area-inset-top), 1rem)', paddingBottom: '1rem' }}>
       <div className="max-w-3xl mx-auto" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', flex: '1', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
         {/* Header */}
         <div className="text-center mb-3 sm:mb-12">
