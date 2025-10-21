@@ -19,7 +19,7 @@ export default function BirthChartForm({ onSubmit, isLoading }: BirthChartFormPr
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="card">
-        <div className="text-center mb-8">
+        <div className="text-center mb-6 sm:mb-8">
           <h2 className="text-xl font-light mb-2 tracking-wide" style={{ color: 'var(--color-text-primary)', letterSpacing: '0.08em' }}>
             YOUR BIRTH CHART
           </h2>
@@ -28,7 +28,7 @@ export default function BirthChartForm({ onSubmit, isLoading }: BirthChartFormPr
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
           {/* Name Field */}
           <div>
             <label htmlFor="name" className="block text-xs font-medium mb-2 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
@@ -107,7 +107,7 @@ export default function BirthChartForm({ onSubmit, isLoading }: BirthChartFormPr
           <button
             type="submit"
             disabled={isLoading}
-            className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed mt-8"
+            className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed mt-6 sm:mt-8"
           >
             {isLoading ? (
               <span className="flex items-center justify-center">

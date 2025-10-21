@@ -7,7 +7,7 @@ interface ChartResultProps {
 
 export default function ChartResult({ chart, onReset }: ChartResultProps) {
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-6">
+    <div className="w-full max-w-2xl mx-auto space-y-4 sm:space-y-6">
       {/* Header Card */}
       <div className="card">
         <h2 className="text-xl font-light mb-3 tracking-wide" style={{ color: 'var(--color-text-primary)', letterSpacing: '0.08em' }}>
@@ -22,8 +22,8 @@ export default function ChartResult({ chart, onReset }: ChartResultProps) {
 
       {/* Big Three */}
       <div className="card">
-        <h3 className="text-sm font-medium mb-6 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Essential Signs</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <h3 className="text-sm font-medium mb-4 sm:mb-6 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Essential Signs</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           <div className="border-t pt-4" style={{ borderColor: 'var(--color-border)' }}>
             <div className="text-xs mb-2 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Sun Sign</div>
             <div className="text-2xl font-light" style={{ color: 'var(--color-text-primary)' }}>{chart.sunSign}</div>
@@ -44,7 +44,7 @@ export default function ChartResult({ chart, onReset }: ChartResultProps) {
 
       {/* Planetary Positions */}
       <div className="card">
-        <h3 className="text-sm font-medium mb-6 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Planetary Positions</h3>
+        <h3 className="text-sm font-medium mb-4 sm:mb-6 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Planetary Positions</h3>
         <div className="space-y-3">
           {chart.planetaryPositions.map((position, index) => (
             <div
@@ -52,12 +52,12 @@ export default function ChartResult({ chart, onReset }: ChartResultProps) {
               className="flex justify-between items-center py-2 border-b"
               style={{ borderColor: 'var(--color-border)' }}
             >
-              <div className="flex items-center gap-3">
-                <span className="font-medium text-sm" style={{ color: 'var(--color-text-primary)' }}>{position.planet}</span>
-                <span className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>in {position.sign}</span>
+              <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                <span className="font-medium text-sm flex-shrink-0" style={{ color: 'var(--color-text-primary)' }}>{position.planet}</span>
+                <span className="text-xs truncate" style={{ color: 'var(--color-text-secondary)' }}>in {position.sign}</span>
               </div>
-              <div className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
-                {position.degree.toFixed(2)}° · House {position.house}
+              <div className="text-xs whitespace-nowrap flex-shrink-0" style={{ color: 'var(--color-text-secondary)' }}>
+                {position.degree.toFixed(2)}° · H{position.house}
               </div>
             </div>
           ))}
@@ -66,8 +66,8 @@ export default function ChartResult({ chart, onReset }: ChartResultProps) {
 
       {/* Houses */}
       <div className="card">
-        <h3 className="text-sm font-medium mb-6 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Houses</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <h3 className="text-sm font-medium mb-4 sm:mb-6 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Houses</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           {chart.houses.map((house, index) => (
             <div key={index} className="border-t pt-3" style={{ borderColor: 'var(--color-border)' }}>
               <div className="text-xs mb-1" style={{ color: 'var(--color-text-secondary)' }}>House {house.number}</div>
@@ -80,7 +80,7 @@ export default function ChartResult({ chart, onReset }: ChartResultProps) {
 
       {/* Interpretation */}
       <div className="card">
-        <h3 className="text-sm font-medium mb-6 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Interpretation</h3>
+        <h3 className="text-sm font-medium mb-4 sm:mb-6 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Interpretation</h3>
         <div className="max-w-none">
           <p className="whitespace-pre-line leading-relaxed text-sm" style={{ color: 'var(--color-text-primary)', lineHeight: '1.8' }}>
             {chart.interpretation}
@@ -89,13 +89,13 @@ export default function ChartResult({ chart, onReset }: ChartResultProps) {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex gap-4 pt-4">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
         <button onClick={onReset} className="btn-primary flex-1">
           New Chart
         </button>
         <button
           onClick={() => window.print()}
-          className="font-medium py-3 px-6 transition-colors duration-200 border"
+          className="font-medium py-3 px-4 sm:px-6 transition-colors duration-200 border"
           style={{
             backgroundColor: 'var(--color-surface)',
             borderColor: 'var(--color-text-primary)',
@@ -103,7 +103,8 @@ export default function ChartResult({ chart, onReset }: ChartResultProps) {
             fontSize: '0.875rem',
             letterSpacing: '0.05em',
             textTransform: 'uppercase',
-            fontWeight: '500'
+            fontWeight: '500',
+            boxSizing: 'border-box'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = 'var(--color-text-primary)';

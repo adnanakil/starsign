@@ -99,22 +99,24 @@ export default function LocationAutocomplete({ value, onChange, error }: Locatio
 
       {isOpen && results.length > 0 && (
         <div
-          className="absolute z-10 w-full mt-1 border overflow-hidden"
+          className="absolute z-10 w-full mt-1 border overflow-hidden left-0 right-0"
           style={{
             backgroundColor: 'var(--color-surface)',
             borderColor: 'var(--color-border)',
             maxHeight: '200px',
-            overflowY: 'auto'
+            overflowY: 'auto',
+            boxSizing: 'border-box'
           }}
         >
           {results.map((result) => (
             <button
               key={result.place_id}
               type="button"
-              className="w-full text-left px-4 py-3 text-sm transition-colors border-b"
+              className="w-full text-left px-3 py-2 sm:px-4 sm:py-3 text-sm transition-colors border-b"
               style={{
                 color: 'var(--color-text-primary)',
-                borderColor: 'var(--color-border)'
+                borderColor: 'var(--color-border)',
+                boxSizing: 'border-box'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--color-bg)';
