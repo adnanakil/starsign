@@ -80,8 +80,8 @@ function App() {
   // Show dashboard for logged in users (unless viewing a specific chart)
   if (user && !chart) {
     return (
-      <div style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', height: '100dvh', overflow: 'hidden', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', paddingTop: 'max(env(safe-area-inset-top), 1rem)', paddingLeft: '0.75rem', paddingRight: '0.75rem', paddingBottom: '0' }}>
-        <div className="max-w-3xl mx-auto" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', flex: '1', display: 'flex', flexDirection: 'column', overflow: 'auto', paddingBottom: '0' }}>
+      <div style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', height: '100dvh', overflow: 'hidden', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', paddingTop: 'max(env(safe-area-inset-top), 1rem)', paddingLeft: '0.75rem', paddingRight: '0.75rem' }}>
+        <div className="max-w-3xl mx-auto" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', flex: '1', display: 'flex', flexDirection: 'column', overflowY: 'auto', overflowX: 'hidden', margin: 0 }}>
           <UserDashboard userId={user.uid} userName={user.email?.split('@')[0]} />
         </div>
       </div>
@@ -89,8 +89,8 @@ function App() {
   }
 
   return (
-    <div style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', height: '100dvh', overflow: 'hidden', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', paddingTop: 'max(env(safe-area-inset-top), 1rem)', paddingLeft: '0.75rem', paddingRight: '0.75rem', paddingBottom: '0' }}>
-      <div className="max-w-3xl mx-auto" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', flex: '1', display: 'flex', flexDirection: 'column', overflow: 'auto', paddingBottom: '0' }}>
+    <div style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', height: '100dvh', overflow: 'hidden', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', paddingTop: 'max(env(safe-area-inset-top), 1rem)', paddingLeft: '0.75rem', paddingRight: '0.75rem' }}>
+      <div className="max-w-3xl mx-auto" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', flex: '1', display: 'flex', flexDirection: 'column', overflowY: 'auto', overflowX: 'hidden', margin: 0 }}>
         {/* Header */}
         <div className="text-center mb-3 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-light mb-1 tracking-wide" style={{ color: 'var(--color-text-primary)', letterSpacing: '0.1em' }}>

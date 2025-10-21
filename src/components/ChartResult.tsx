@@ -7,7 +7,7 @@ interface ChartResultProps {
 
 export default function ChartResult({ chart, onReset }: ChartResultProps) {
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-4 sm:space-y-6" style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 1rem)' }}>
+    <div className="w-full max-w-2xl mx-auto space-y-4 sm:space-y-6">
       {/* Header Card */}
       <div className="card">
         <h2 className="text-xl font-light mb-3 tracking-wide" style={{ color: 'var(--color-text-primary)', letterSpacing: '0.08em' }}>
@@ -89,7 +89,7 @@ export default function ChartResult({ chart, onReset }: ChartResultProps) {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4" style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 1rem)' }}>
         <button onClick={onReset} className="btn-primary flex-1">
           New Chart
         </button>

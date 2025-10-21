@@ -85,7 +85,7 @@ export default function UserDashboard({ userId, userName }: UserDashboardProps) 
   }
 
   return (
-    <div className="max-w-4xl mx-auto" style={{ width: '100%', paddingBottom: 'max(env(safe-area-inset-bottom), 1rem)' }}>
+    <div className="max-w-4xl mx-auto" style={{ width: '100%' }}>
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
@@ -160,7 +160,7 @@ export default function UserDashboard({ userId, userName }: UserDashboardProps) 
       </div>
 
       {/* Saved Charts Section */}
-      <div>
+      <div style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 1rem)' }}>
         <h2
           className="text-lg sm:text-xl font-light tracking-wide mb-4"
           style={{ color: 'var(--color-text-primary)', letterSpacing: '0.05em' }}
