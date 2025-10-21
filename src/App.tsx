@@ -40,8 +40,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen py-8 px-3 sm:py-12 sm:px-4" style={{ backgroundColor: 'var(--color-bg)' }}>
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen py-8 px-3 sm:py-12 sm:px-4" style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', overflowX: 'hidden', boxSizing: 'border-box' }}>
+      <div className="max-w-3xl mx-auto" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-light mb-3 tracking-wide" style={{ color: 'var(--color-text-primary)', letterSpacing: '0.1em' }}>

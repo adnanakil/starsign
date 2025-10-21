@@ -78,7 +78,7 @@ export default function LocationAutocomplete({ value, onChange, error }: Locatio
   };
 
   return (
-    <div ref={wrapperRef} className="relative">
+    <div ref={wrapperRef} className="relative" style={{ width: '100%', maxWidth: '100%' }}>
       <input
         type="text"
         className="input-field"
@@ -86,6 +86,7 @@ export default function LocationAutocomplete({ value, onChange, error }: Locatio
         value={query}
         onChange={handleInputChange}
         onFocus={() => results.length > 0 && setIsOpen(true)}
+        style={{ maxWidth: '100%' }}
       />
 
       {isLoading && (
