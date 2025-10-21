@@ -9,6 +9,7 @@ export interface BirthChartData {
 
 export interface ChartInterpretation {
   id?: string;
+  userId?: string;
   birthChartData: BirthChartData;
   sunSign: string;
   moonSign: string;

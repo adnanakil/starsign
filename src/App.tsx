@@ -1,14 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { onAuthStateChanged, type User } from 'firebase/auth';
+import { auth } from './firebase';
 import BirthChartForm from './components/BirthChartForm';
 import ChartResult from './components/ChartResult';
+import AuthModal from './components/AuthModal';
+import UserDashboard from './components/UserDashboard';
 import type { BirthChartData, ChartInterpretation } from './types';
 import { generateBirthChart } from './utils/astrology';
 import { saveBirthChart } from './services/chartService';
 
 function App() {
+  const [user, setUser] = useState<User | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [chart, setChart] = useState<ChartInterpretation | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  // Listen for auth state changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setIsAuthLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleSubmit = async (data: BirthChartData) => {
     setIsLoading(true);
@@ -17,14 +34,16 @@ function App() {
     try {
       // Generate the birth chart
       const generatedChart = await generateBirthChart(data);
-      setChart(generatedChart);
 
-      // Save to Firebase (optional - will fail gracefully if not configured)
-      try {
-        await saveBirthChart(generatedChart);
-      } catch (saveError) {
-        console.warn('Chart generated but not saved to database:', saveError);
-        // Continue anyway - the chart was generated successfully
+      // If user is logged in, save immediately with userId
+      if (user) {
+        const chartWithUser = { ...generatedChart, userId: user.uid };
+        await saveBirthChart(chartWithUser);
+        setChart(chartWithUser);
+      } else {
+        // Show auth modal for guests
+        setChart(generatedChart);
+        setShowAuthModal(true);
       }
     } catch (err) {
       setError('Failed to generate birth chart. Please try again.');
@@ -34,10 +53,45 @@ function App() {
     }
   };
 
+  const handleAuthSuccess = async (userId: string) => {
+    if (chart) {
+      try {
+        await saveBirthChart({ ...chart, userId });
+      } catch (saveError) {
+        console.error('Failed to save chart with user ID:', saveError);
+      }
+    }
+  };
+
   const handleReset = () => {
     setChart(null);
     setError(null);
   };
+
+  // Show loading while checking auth state
+  if (isAuthLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--color-bg)' }}>
+        <p style={{ color: 'var(--color-text-secondary)' }}>Loading...</p>
+      </div>
+    );
+  }
+
+  // Show dashboard for logged in users (unless viewing a specific chart)
+  if (user && !chart) {
+    return (
+      <div className="min-h-screen py-8 px-3 sm:py-12 sm:px-4" style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', overflowX: 'hidden', boxSizing: 'border-box' }}>
+        <div className="max-w-3xl mx-auto" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
+          <UserDashboard userId={user.uid} userName={user.email?.split('@')[0]} />
+
+          {/* Footer */}
+          <div className="text-center mt-16 text-xs" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em' }}>
+            <p>Birth chart interpretations are for entertainment purposes</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen py-8 px-3 sm:py-12 sm:px-4" style={{ backgroundColor: 'var(--color-bg)', width: '100%', maxWidth: '100vw', overflowX: 'hidden', boxSizing: 'border-box' }}>
@@ -51,6 +105,19 @@ function App() {
             Astrology Birth Chart Interpretation
           </p>
         </div>
+
+        {/* Sign in button for logged out users */}
+        {!user && !chart && (
+          <div className="text-center mb-6">
+            <button
+              onClick={() => setShowAuthModal(true)}
+              className="text-sm"
+              style={{ color: 'var(--color-accent)', textDecoration: 'underline' }}
+            >
+              Already have an account? Sign In
+            </button>
+          </div>
+        )}
 
         {/* Error Message */}
         {error && (
@@ -71,6 +138,13 @@ function App() {
           <p>Birth chart interpretations are for entertainment purposes</p>
         </div>
       </div>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onSuccess={handleAuthSuccess}
+      />
     </div>
   );
 }
