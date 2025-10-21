@@ -14,38 +14,38 @@ export default function BirthChartForm({ onSubmit, isLoading }: BirthChartFormPr
   } = useForm<BirthChartData>();
 
   return (
-    <div className="w-full max-w-md mx-auto p-4">
+    <div className="w-full max-w-md mx-auto">
       <div className="card">
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
-            Cosmic Birth Chart
-          </h1>
-          <p className="text-white/70 text-sm">
-            Discover your astrological blueprint
+        <div className="text-center mb-8">
+          <h2 className="text-xl font-light mb-2 tracking-wide" style={{ color: 'var(--color-text-primary)', letterSpacing: '0.08em' }}>
+            YOUR BIRTH CHART
+          </h2>
+          <p className="text-xs" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em' }}>
+            Enter your details to begin
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Name Field */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-2">
+            <label htmlFor="name" className="block text-xs font-medium mb-2 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
               Full Name
             </label>
             <input
               id="name"
               type="text"
               className="input-field"
-              placeholder="Enter your full name"
+              placeholder=""
               {...register('name', { required: 'Name is required' })}
             />
             {errors.name && (
-              <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>
+              <p className="text-xs mt-1" style={{ color: '#8B3A3A' }}>{errors.name.message}</p>
             )}
           </div>
 
           {/* Date of Birth */}
           <div>
-            <label htmlFor="dateOfBirth" className="block text-sm font-medium mb-2">
+            <label htmlFor="dateOfBirth" className="block text-xs font-medium mb-2 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
               Date of Birth
             </label>
             <input
@@ -55,13 +55,13 @@ export default function BirthChartForm({ onSubmit, isLoading }: BirthChartFormPr
               {...register('dateOfBirth', { required: 'Date of birth is required' })}
             />
             {errors.dateOfBirth && (
-              <p className="text-red-400 text-sm mt-1">{errors.dateOfBirth.message}</p>
+              <p className="text-xs mt-1" style={{ color: '#8B3A3A' }}>{errors.dateOfBirth.message}</p>
             )}
           </div>
 
           {/* Time of Birth */}
           <div>
-            <label htmlFor="timeOfBirth" className="block text-sm font-medium mb-2">
+            <label htmlFor="timeOfBirth" className="block text-xs font-medium mb-2 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
               Time of Birth
             </label>
             <input
@@ -71,13 +71,13 @@ export default function BirthChartForm({ onSubmit, isLoading }: BirthChartFormPr
               {...register('timeOfBirth', { required: 'Time of birth is required' })}
             />
             {errors.timeOfBirth && (
-              <p className="text-red-400 text-sm mt-1">{errors.timeOfBirth.message}</p>
+              <p className="text-xs mt-1" style={{ color: '#8B3A3A' }}>{errors.timeOfBirth.message}</p>
             )}
           </div>
 
           {/* Place of Birth */}
           <div>
-            <label htmlFor="placeOfBirth" className="block text-sm font-medium mb-2">
+            <label htmlFor="placeOfBirth" className="block text-xs font-medium mb-2 tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
               Place of Birth
             </label>
             <input
@@ -88,7 +88,7 @@ export default function BirthChartForm({ onSubmit, isLoading }: BirthChartFormPr
               {...register('placeOfBirth', { required: 'Place of birth is required' })}
             />
             {errors.placeOfBirth && (
-              <p className="text-red-400 text-sm mt-1">{errors.placeOfBirth.message}</p>
+              <p className="text-xs mt-1" style={{ color: '#8B3A3A' }}>{errors.placeOfBirth.message}</p>
             )}
           </div>
 
@@ -96,26 +96,21 @@ export default function BirthChartForm({ onSubmit, isLoading }: BirthChartFormPr
           <button
             type="submit"
             disabled={isLoading}
-            className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed mt-8"
           >
             {isLoading ? (
               <span className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg className="animate-spin -ml-1 mr-3 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" style={{ color: 'var(--color-surface)' }}>
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Generating Chart...
+                Generating...
               </span>
             ) : (
-              'Generate Birth Chart'
+              'Generate Chart'
             )}
           </button>
         </form>
-
-        <div className="mt-6 text-center text-xs text-white/50">
-          <p>Your birth chart will reveal insights about your personality,</p>
-          <p>relationships, career, and life path through the stars.</p>
-        </div>
       </div>
     </div>
   );

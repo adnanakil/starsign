@@ -40,22 +40,21 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen py-12 px-4" style={{ backgroundColor: 'var(--color-bg)' }}>
+      <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="text-6xl mb-4">✨</div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-purple-300 via-pink-300 to-purple-400 bg-clip-text text-transparent">
-            StarSign
+        <div className="text-center mb-12">
+          <h1 className="text-3xl md:text-4xl font-light mb-3 tracking-wide" style={{ color: 'var(--color-text-primary)', letterSpacing: '0.1em' }}>
+            STARSIGN
           </h1>
-          <p className="text-white/70 text-lg">
-            Unlock the secrets written in the stars
+          <p className="text-sm tracking-wide" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em' }}>
+            Astrology Birth Chart Interpretation
           </p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="max-w-md mx-auto mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-200">
+          <div className="max-w-md mx-auto mb-8 p-4 border" style={{ backgroundColor: '#FFF5F5', borderColor: '#E8C5C5', color: '#8B3A3A' }}>
             {error}
           </div>
         )}
@@ -68,9 +67,8 @@ function App() {
         )}
 
         {/* Footer */}
-        <div className="text-center mt-12 text-white/40 text-sm">
+        <div className="text-center mt-16 text-xs" style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.05em' }}>
           <p>Birth chart interpretations are for entertainment purposes</p>
-          <p className="mt-1">Made with cosmic energy</p>
         </div>
       </div>
     </div>
