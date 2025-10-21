@@ -1,4 +1,5 @@
 import type { BirthChartData, ChartInterpretation, ZodiacSign, PlanetPosition, House } from '../types';
+import { generateAIInterpretation } from '../services/geminiService';
 
 // Calculate sun sign based on birth date
 export function calculateSunSign(date: string): ZodiacSign {
@@ -85,75 +86,30 @@ function generateHouses(risingSign: ZodiacSign): House[] {
   }));
 }
 
-// Generate interpretation based on chart data
-function generateInterpretation(sunSign: ZodiacSign, moonSign: ZodiacSign, risingSign: ZodiacSign): string {
-  const sunInterpretations: Record<ZodiacSign, string> = {
-    Aries: 'Bold and pioneering, you approach life with courage and enthusiasm.',
-    Taurus: 'Grounded and reliable, you value stability and the finer things in life.',
-    Gemini: 'Curious and communicative, you thrive on mental stimulation and variety.',
-    Cancer: 'Nurturing and intuitive, you lead with your heart and value emotional connections.',
-    Leo: 'Charismatic and creative, you shine brightest when expressing your authentic self.',
-    Virgo: 'Analytical and service-oriented, you excel at bringing order and improvement to the world.',
-    Libra: 'Diplomatic and harmonious, you seek balance and beauty in all aspects of life.',
-    Scorpio: 'Intense and transformative, you possess remarkable depth and investigative power.',
-    Sagittarius: 'Adventurous and philosophical, you seek truth and expansion through experience.',
-    Capricorn: 'Ambitious and disciplined, you build lasting structures through determination and wisdom.',
-    Aquarius: 'Innovative and humanitarian, you envision and create a better future for all.',
-    Pisces: 'Compassionate and imaginative, you navigate life through intuition and spiritual connection.',
-  };
-
-  const moonInterpretations: Record<ZodiacSign, string> = {
-    Aries: 'Your emotional nature is direct and passionate.',
-    Taurus: 'You find emotional security through stability and comfort.',
-    Gemini: 'Your feelings are expressed through communication and intellectual connection.',
-    Cancer: 'Deeply sensitive, you process emotions with profound care.',
-    Leo: 'You need recognition and warmth to feel emotionally fulfilled.',
-    Virgo: 'You analyze your feelings and seek practical ways to address them.',
-    Libra: 'Emotional harmony and partnership are essential to your wellbeing.',
-    Scorpio: 'You experience emotions intensely and transformatively.',
-    Sagittarius: 'Freedom and optimism fuel your emotional landscape.',
-    Capricorn: 'You approach emotions with maturity and self-control.',
-    Aquarius: 'Your emotional needs are unique and often unconventional.',
-    Pisces: 'Highly empathetic, you absorb the emotions of those around you.',
-  };
-
-  const risingInterpretations: Record<ZodiacSign, string> = {
-    Aries: 'You present yourself as confident and action-oriented.',
-    Taurus: 'Others see you as calm, reliable, and grounded.',
-    Gemini: 'Your outward persona is witty, adaptable, and engaging.',
-    Cancer: 'You come across as caring, protective, and emotionally attuned.',
-    Leo: 'Your presence is warm, dramatic, and naturally commanding.',
-    Virgo: 'You appear modest, helpful, and detail-focused to others.',
-    Libra: 'Grace, charm, and diplomacy characterize your outward expression.',
-    Scorpio: 'You project intensity, mystery, and magnetic power.',
-    Sagittarius: 'Your approach to life appears optimistic, open, and adventurous.',
-    Capricorn: 'You present as responsible, mature, and ambitious.',
-    Aquarius: 'Others perceive you as unique, progressive, and independent.',
-    Pisces: 'You appear gentle, artistic, and spiritually inclined.',
-  };
-
-  return `Your Sun in ${sunSign} reveals that ${sunInterpretations[sunSign]}
-
-With your Moon in ${moonSign}, ${moonInterpretations[moonSign]}
-
-Your ${risingSign} Rising means that ${risingInterpretations[risingSign]}
-
-This unique combination creates a multifaceted personality. Your ${sunSign} core drives your basic identity and life purpose, while your ${moonSign} Moon shapes your emotional responses and inner needs. Meanwhile, your ${risingSign} Ascendant influences how you approach new situations and how others initially perceive you.
-
-The interplay between these three key placements forms the foundation of your astrological identity, with each planetary position adding additional layers of meaning to your cosmic blueprint.`;
-}
+// Old template-based interpretation function removed
+// Now using AI-generated interpretations via Gemini API
+// See: src/services/geminiService.ts
 
 // Main function to generate complete birth chart
 export async function generateBirthChart(data: BirthChartData): Promise<ChartInterpretation> {
-  // Simulate API delay for realistic UX
-  await new Promise(resolve => setTimeout(resolve, 1500));
-
   const sunSign = calculateSunSign(data.dateOfBirth);
   const moonSign = calculateMoonSign(data.dateOfBirth);
   const risingSign = calculateRisingSign(data.timeOfBirth, data.dateOfBirth, data.latitude, data.longitude);
   const planetaryPositions = generatePlanetaryPositions(data.dateOfBirth, sunSign);
   const houses = generateHouses(risingSign);
-  const interpretation = generateInterpretation(sunSign, moonSign, risingSign);
+
+  // Create partial chart data for AI interpretation
+  const partialChart = {
+    birthChartData: data,
+    sunSign,
+    moonSign,
+    risingSign,
+    planetaryPositions,
+    houses,
+  };
+
+  // Generate AI-powered interpretation using Gemini
+  const interpretation = await generateAIInterpretation(sunSign, moonSign, risingSign, partialChart);
 
   return {
     birthChartData: data,
