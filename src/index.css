@@ -37,6 +37,9 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+  /* Safe area padding for iOS notch and status bar */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .btn-primary {
