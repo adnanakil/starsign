@@ -97,7 +97,7 @@ export default function MoonPhaseLoader() {
               left: 0,
               width: '100%',
               height: '100%',
-              background: 'linear-gradient(90deg, transparent 0%, rgba(44, 44, 44, 0.8) 50%, transparent 100%)',
+              background: 'linear-gradient(90deg, transparent 0%, #000000 50%, transparent 100%)',
               animation: 'moonPhase 3s ease-in-out infinite 1s',
             }}
           />
