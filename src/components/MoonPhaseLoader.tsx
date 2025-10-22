@@ -89,16 +89,18 @@ export default function MoonPhaseLoader() {
             }}
           />
 
-          {/* Moving shadow overlay - starts after rise animation */}
+          {/* Moving shadow overlay - curved shadow for crescent effect */}
           <div
             style={{
               position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              background: 'linear-gradient(90deg, transparent 0%, #000000 50%, transparent 100%)',
-              animation: 'moonPhase 3s ease-in-out infinite 1s',
+              top: '50%',
+              left: '50%',
+              width: '80px',
+              height: '80px',
+              backgroundColor: '#000000',
+              borderRadius: '50%',
+              transform: 'translate(-50%, -50%)',
+              animation: 'moonPhase 4s ease-in-out infinite 1s',
             }}
           />
         </div>
@@ -130,10 +132,13 @@ export default function MoonPhaseLoader() {
 
         @keyframes moonPhase {
           0% {
-            transform: translateX(-100%);
+            transform: translate(-150%, -50%);
+          }
+          50% {
+            transform: translate(-50%, -50%);
           }
           100% {
-            transform: translateX(100%);
+            transform: translate(50%, -50%);
           }
         }
 
